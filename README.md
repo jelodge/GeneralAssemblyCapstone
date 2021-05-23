@@ -22,7 +22,9 @@ The project was carried out in several stages:
 5. Evaluation - the effectiveness of the different models is discussed
 6. Areas for further investigation - potential future avenues for exploration
 7. Conclusions
-<br><br>
+
+The Jupyter Notebook with the related code, as well as the necessary assets to run it, are contained within this repo.
+
 1. **ACQUIRE DATA**
 
 Using the requests and Beatiful Soup Python packages I was able to scrape and parse data from the Wine Enthusiast website over the course of two weeks, collecting a number of different features of each wine and their associated prices. This gave me a dataset of 47,674 wines from a wide range of regions, prices and styles.
