@@ -102,21 +102,20 @@ A residual plot shows a fair amount of scope for improvement, which we had alrea
 
 Now that we have generated a model with the features of our wines, I looked into other ways that I might be able to improve upon what has already been done. These fell into three different categories.
 
-Dimensionality reduction
-Usually we could employ techniques such as principal component analysis (PCA) to define a new set of orthogonal axes within the feature space to optimise a trade-off between retained dimensions and retained variance/information within the data
-However, given that my dataset was in fact mostly one-hot encoded categorical variables, PCA would not be applicable given its reliance on finding new axes to maximise variance in feature space; for binary features of 1s or 0s this approach does not necessarily make sense
-Alternatively, multiple correspondence analysis (MCA) attempts to accomplish a similar result but with one-hot encoded categorical features by attempting to cluster features that often indicate in the same direction (e.g. hypothetically if all French wines were red then they would always both indicate 1 in those columns, arguably providing redundant information)
-However, after attempting to apply this to my dataset it proved to result in too much information loss for too little reduction in dimensionality, not to mention increased complexity of relating the new coordinate system back to the original variables
+*Dimensionality reduction*
+- Usually we could employ techniques such as principal component analysis (PCA) to define a new set of orthogonal axes within the feature space to optimise a trade-off between retained dimensions and retained variance/information within the data
+- Alternatively, multiple correspondence analysis (MCA) attempts to accomplish a similar result but with one-hot encoded categorical features by attempting to cluster features that often indicate in the same direction (e.g. hypothetically if all French wines were red then they would always both indicate 1 in those columns, arguably providing redundant information)
+- However, after attempting to apply this to my dataset it proved to result in too much information loss for too little reduction in dimensionality, not to mention increased complexity of relating the new coordinate system back to the original variables
 
-Natural Language Processing of Reviews
-By incorporating the text from each wine, also in one-hot encoded sparse matrix format, we could try to identify key words from the wine titles and reviews that could provide predictive power in regards to modelling wine prices
-Using the SGDR on the text sparse matrix achieved an R<sup>2</sup> of around 0.18
-Incorporating the NLP and categorical feature sparse matrices into one larger model is an area for further study
+*Natural Language Processing of Reviews*
+- By incorporating the text from each wine, also in one-hot encoded sparse matrix format, we could try to identify key words from the wine titles and reviews that could provide predictive power in regards to modelling wine prices
+- Using the SGDR on the text sparse matrix achieved an R<sup>2</sup> of around 0.18
+- Incorporating the NLP and categorical feature sparse matrices into one larger model is an area for further study
 
-Feature Engineering
-It was observed and noted in the EDA stage that the rating feature, when used in its quasi-continuous form (as previously discussed) that an exponential relationship was evident
-An exponential function, f(x) = ae<sup>b(x-c)</sup> + d with a, b, c and d all constants and x as wine rating in this instance, was fitted, and visually appeared to be a good way to relate the two variables
-By applying a transformation using the fitted relationship above, we may be able to improve the predictive power of the rating variable in future modelling
+*Feature Engineering*
+- It was observed and noted in the EDA stage that the rating feature, when used in its quasi-continuous form (as previously discussed) that an exponential relationship was evident
+- An exponential function, f(x) = ae<sup>b(x-c)</sup> + d with a, b, c and d all constants and x as wine rating in this instance, was fitted, and visually appeared to be a good way to relate the two variables
+- By applying a transformation using the fitted relationship above, we may be able to improve the predictive power of the rating variable in future modelling
 
 These areas for improvement are still somewhat of a work in progress, and publishing these findings publicly will follow in short order.
 
@@ -124,7 +123,7 @@ These areas for improvement are still somewhat of a work in progress, and publis
 
 Overall this project has been fascinating to work on, both as a wine aficionado and as an introduction to data science. Tackling issues around acquiring and cleaning data, dealing with very high dimension feature spaces and which models are the most appropriate to apply in such circumstances has been intriguing to investigate.
 
-While the model R<sup>2</sup> score is not remarkably high, at only 0.35, there are also considerations for future work to include the NLP and feature engineering methods outlined above which may help to improve this score. Correctly predicting the incredibly high priced wines also proved very difficult for the model, so either an understanding of the limitations of the model’s application or further features to aid in delineating in these outlier cases would also help the model generalise better in the future. That being said, it would also be worth investigating the wines with significantly higher predicted prices than reality, as these could potentially represent under-priced wines given shared characteristics with similar, more expensive bottles.
+While the model R<sup>2</sup> score on test data is not remarkably high, at only 0.38, there are also considerations for future work to include the NLP and feature engineering methods outlined above which may help to improve this score. Correctly predicting the incredibly high priced wines also proved very difficult for the model, so either an understanding of the limitations of the model’s application or further features to aid in delineating in these outlier cases would also help the model generalise better in the future. That being said, it would also be worth investigating the wines with significantly higher predicted prices than reality, as these could potentially represent under-priced wines given shared characteristics with similar, more expensive bottles.
 
 Finally I want to note that this project is still a work in progress, and updates will be shared as they are developed.
 
