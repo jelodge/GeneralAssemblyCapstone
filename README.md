@@ -2,26 +2,26 @@
 ## General Assembly Data Science Immersive Capstone Project
 *By Jack Lodge, May 2021*
 
-INTRO
+**INTRO**
 
 This project was completed independently over the course of 4 weeks as part of the General Assembly Data Science Immersive course. The principal goal of the investigation was to build a model capable of predicting wine prices based on a number of different features and a brief, descriptive review from professional wine critics.
 
-BACKGROUND
+**BACKGROUND**
 
 The wine trade was estimated to be worth over $325bn in 2020, and is expected to continue growing at around 5% year-on-year for the next 7 years. With such a large amount of money being spent on wine, being able to estimate the prices of wines based on their features alone would prove very useful to those in the wine trade, both in providing assurances of their transactions as well as being able to spot outliers that may suggest a wine being over or under priced.
 
-GOALS
+**GOALS**
 
 Using information scraped from a wine review website, I aimed to build a model to predict the prices of wine based on a number of features of the wines, including a short review and rating score given by professional wine critics.
 
-The project was carried out in several parts:
-Acquiring a dataset - a web-scraper was built to collect and parse the data
-Cleaning the data - the dataset was examined to identify any errors or inconsistencies
-Exploratory data analysis - analysing the dataset and the relationships within it to search for any trends
-Modelling - a number of different modelling techniques were carried out and tested on unseen data to try and predict wine prices
-Evaluation - the effectiveness of the different models is discussed
-Areas for further investigation - potential future avenues for exploration
-Conclusions
+The project was carried out in several stages:
+1. Acquiring a dataset - a web-scraper was built to collect and parse the data
+2. Cleaning the data - the dataset was examined to identify any errors or inconsistencies
+3. Exploratory data analysis - analysing the dataset and the relationships within it to search for any trends
+4. Modelling - a number of different modelling techniques were carried out and tested on unseen data to try and predict wine prices
+5. Evaluation - the effectiveness of the different models is discussed
+6. Areas for further investigation - potential future avenues for exploration
+7. Conclusions
 
 1. **ACQUIRE DATA**
 
