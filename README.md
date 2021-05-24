@@ -1,4 +1,4 @@
-# Predcting Wine Prices with Data
+# Predicting Wine Prices with Data
 ## General Assembly Data Science Immersive Capstone Project
 *By Jack Lodge, May 2021*
 
@@ -23,11 +23,11 @@ The project was carried out in several stages:
 6. Areas for further investigation - potential future avenues for exploration
 7. Conclusions
 
-The Jupyter Notebook with the related code, as well as the necessary assets to run it, are contained within this repo.
+The Jupyter Notebook with the related code can be found [here](Predicting_Wine_Prices.ipynb), and the necessary assets to run the code (such as the dataset and saved models, to save time from fitting and optimising again) can be found in the `assets` folder within this repo.
 
 1. **ACQUIRE DATA**
 
-Using the requests and Beatiful Soup Python packages I was able to scrape and parse data from the Wine Enthusiast website over the course of two weeks, collecting a number of different features of each wine and their associated prices. This gave me a dataset of 47,674 wines from a wide range of regions, prices and styles.
+Using the requests and Beautiful Soup Python packages I was able to scrape and parse data from the Wine Enthusiast website over the course of two weeks, collecting a number of different features of each wine and their associated prices. This gave me a dataset of 47,674 wines from a wide range of regions, prices and styles.
 
 2. **DATA CLEANING**
 
@@ -41,7 +41,7 @@ After parsing the data into a DataFrame, utilising the pandas Python package, I 
 |<b>rating</b>|A points system indicating the quality of the wine|
 |<b>price</b>|The price of the wine in US\$|
 |<b>designation</b>|The particular brand of the wine, where applicable|
-|<b>variety</b>|The grape varities, blends or styles of the wine, as appropriate for the given wine|
+|<b>variety</b>|The grape varieties, blends or styles of the wine, as appropriate for the given wine|
 |<b>country</b>|The country of origin|
 |<b>appellation</b>|The region in which the wine was made|
 |<b>sub_region1</b>|A second, more granular region in which the wine was made (where applicable)|
@@ -56,13 +56,13 @@ After parsing the data into a DataFrame, utilising the pandas Python package, I 
 |<b>vintage</b>|The year in which the grapes were harvested|
 |<b>age_when_drank</b>|The approximate age of the wine when it was reviewed|
 
-The data was then initially cleaned by removing the `user_avg_rating variable` (as it was null in all cases, perhaps a feature the site was looking to incorporate previously) and removing any wines without prices listed. I then moved onto investigating discrepancies in some of the other fields, which I have detailed below.
+The data was then initially cleaned by removing the `user_avg_rating` variable (as it was null in all cases, perhaps a feature the site was looking to incorporate previously) and removing any wines without prices listed. I then moved onto investigating discrepancies in some of the other fields, which I have detailed below.
 
 *Alcohol*
 - There were a number of wines with ABV well above the expected maximum value of around 20-25% (for fortified wines), and some were even above 100% ABV
 - Upon further inspection, these errors were mostly attributed to problems on the website itself, with the data entered not necessarily relating to the wines listed
 - While the high ABV wines were easy enough to filter out, there were also problems with other ABVs being incorrectly stated compared to their real values, after carrying out some random spot checks on other sites
-- Due to the difficulty in being able to verify which data were accurate and which weren’t, this column unfortunately had to be dropped as I did not want to pollute the dataset with erroneous information
+- Due to the difficulty in being able to verify which data were accurate, this column unfortunately had to be dropped as I did not want to pollute the dataset with erroneous information
 
 *Duplicated wine reviews*
 - Intuitively, every wine should have a unique review within the dataset as any duplicate entries were removed during the initial parsing stage, but this proved not to be the case
@@ -84,7 +84,9 @@ First I analysed how wine prices within the dataset were distributed, which appe
 
 Then, by implementing a simple correlation calculation of wine prices versus the remaining quantitative fields in my dataset (`rating`, `age_when_drank` and `bottle_size`), we calculated a fairly strong, positive correlation of `price` (my target variable) with both `rating` and `age_when_drank`, but essentially no correlation with `bottle_size`, as might be expected intuitively. It should be noted that in this calculation, given the ordinal nature of the rating variable, it was used as a quasi-continuous variable despite it more naturally falling as a categorical variable.
 
-Finally I wrote a short function to plot the distribution of wine prices for the other categorical variables present, although this was not viable to visualise for some of the categorical fields which had 100s of unique values.
+![correlations](images/correlations.png)
+
+Finally, I wrote a short function to plot the distribution of wine prices for the other categorical variables present, although this was not viable to visualise for some of the categorical fields which had 100s of unique values.
 
 Having noted a number of trends and/or delineating features within the data during the EDA stage, I then moved on to the modelling stage.
 
@@ -94,7 +96,7 @@ Initially I ran a simple linear regression on the numerical features within the 
 
 Next I looked to incorporate the categorical features within the model, which required one-hot encoding for each category. However, when applied to all of the categorical features available, this did result in a huge increase in dimensionality of my dataset to over 11,000 features described by a sparse matrix. This meant that further modelling should be carried out by methodologies which can capitalise on sparse matrix inputs, such as stochastic gradient descent regression (SGDR).
 
-After carrying out a grid search across several hyperparameters, the SGDR achieved an R<sup>2</sup> score of around 0.38 on test data unseen by the model during the fitting process, meaning we could now explain just over a third of the variance in wine prices using our model.
+After carrying out a grid search across several hyperparameters, the SGDR achieved an R<sup>2</sup> score of around 0.36 on test data unseen by the model during the fitting process, meaning we could now explain just over a third of the variance in wine prices using our model.
 
 5. **MODEL EVALUATION**
 
@@ -125,7 +127,7 @@ These areas for improvement are still somewhat of a work in progress, and publis
 
 Overall this project has been fascinating to work on, both as a wine aficionado and as an introduction to data science. Tackling issues around acquiring and cleaning data, dealing with very high dimension feature spaces and which models are the most appropriate to apply in such circumstances has been intriguing to investigate.
 
-While the model R<sup>2</sup> score on test data is not remarkably high, at only 0.38, there are also considerations for future work to include the NLP and feature engineering methods outlined above which may help to improve this score. Correctly predicting the incredibly high priced wines also proved very difficult for the model, so either an understanding of the limitations of the model’s application or further features to aid in delineating in these outlier cases would also help the model generalise better in the future. That being said, it would also be worth investigating the wines with significantly higher predicted prices than reality, as these could potentially represent under-priced wines given shared characteristics with similar, more expensive bottles.
+While the model R<sup>2</sup> score on test data is not remarkably high, at only 0.36, there are also considerations for future work to include the NLP and feature engineering methods outlined above which may help to improve this score. Correctly predicting the incredibly high priced wines also proved very difficult for the model, so either an understanding of the limitations of the model’s application or further features to aid in delineating in these outlier cases would also help the model generalise better in the future. That being said, it would also be worth investigating the wines with significantly higher predicted prices than reality, as these could potentially represent under-priced wines given shared characteristics with similar, more expensive bottles.
 
 Finally I want to note that this project is still a work in progress, and updates will be shared as they are developed.
 
