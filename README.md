@@ -2,6 +2,8 @@
 ## General Assembly Data Science Immersive Capstone Project
 *By Jack Lodge, May 2021*
 
+![wine_glasses](images/wine_glasses.jpg)
+
 **INTRO**
 
 This project was completed independently over the course of 4 weeks as part of the General Assembly Data Science Immersive course. The principal goal of the investigation was to build a model capable of predicting wine prices based on a number of different features and a brief, descriptive review from professional wine critics.
