@@ -4,6 +4,9 @@
 
 ![wine_glasses](images/wine_glasses.jpg)
 
+Photo by <a href="https://unsplash.com/@qwitka?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Maksym Kaharlytskyi</a> on <a href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
+
 **INTRO**
 
 This project was completed independently over the course of 4 weeks as part of the General Assembly Data Science Immersive course. The principal goal of the investigation was to build a model capable of predicting wine prices based on a number of different features and a brief, descriptive review from professional wine critics.
