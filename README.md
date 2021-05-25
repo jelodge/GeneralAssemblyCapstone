@@ -121,7 +121,7 @@ Now that we have generated a model with the features of our wines, I looked into
 - An exponential function, f(x) = ae<sup>b(x-c)</sup> + d with a, b, c and d all constants and x as wine rating in this instance, was fitted, and visually appeared to be a good way to relate the two variables
 - By applying a transformation using the fitted relationship above, we may be able to improve the predictive power of the rating variable in future modelling
 
-[exponential_feature_engineering](images/exponential_feature_engineering.png)
+![exponential_feature_engineering](images/exponential_feature_engineering.png)
 
 These areas for improvement are still somewhat of a work in progress, and publishing these findings publicly will follow in short order.
 
