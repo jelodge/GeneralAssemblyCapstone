@@ -5,15 +5,15 @@
 ![wine_glasses](images/wine_glasses.jpg)
 
 Photo by <a href="https://unsplash.com/@qwitka?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Maksym Kaharlytskyi</a> on <a href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-  
+
 
 **INTRO**
 
-This project was completed independently over the course of 4 weeks as part of the General Assembly Data Science Immersive course. The principal goal of the investigation was to build a model capable of predicting wine prices based on a number of different features and a brief, descriptive review from professional wine critics.
+This project was completed independently over the course of 4 weeks as part of the General Assembly Data Science Immersive course. The principal goal of the investigation was to build a model capable of predicting wine prices based on a number of different features and a brief, descriptive review from professional wine critics. Upon completion of the course, other avenues of investigation have also been carried out; this project is still a work-in-progress, and updates will be pushed to this repo over time.
 
 **BACKGROUND**
 
-The wine trade was estimated to be worth over $325bn in 2020, and is expected to continue growing at around 5% year-on-year for the next 7 years. With such a large amount of money being spent on wine, being able to estimate the prices of wines based on their features alone would prove very useful to those in the wine trade, both in providing assurances of their transactions as well as being able to spot outliers that may suggest a wine being over or under priced.
+The wine trade was estimated to be worth over $325bn in 2020, and is expected to continue growing at around 5% year-on-year for the next 7 years. With such a large amount of money being spent on wine, being able to estimate the prices of wines based on their features alone would prove very useful to those in the wine trade, both in providing assurances of their transactions as well as being able to spot outliers that may suggest a wine being over or under priced. This investigation can also be carried out on the natural language reviews of wines, to see if there are any features in particular which are effective predictors of a wine's price.
 
 **GOALS**
 
@@ -28,11 +28,11 @@ The project was carried out in several stages:
 6. Areas for further investigation - potential future avenues for exploration
 7. Conclusions
 
-The Jupyter Notebook with the related code can be found [here](Predicting_Wine_Prices.ipynb), and the necessary assets to run the code (such as the dataset and saved models, to save time from fitting and optimising again) can be found in the `assets` folder within this repo.
+The Jupyter Notebook with the related code can be found [here](Predicting_Wine_Prices.ipynb), and the necessary assets to run the code (such as the dataset and saved models, to save time from fitting and optimising again) can be found in the `assets` folder within this repo. Running the entire notebook from start to finish will take a very long time, due to model optimisation, so please bear in mind (and try to use the saved assets to save on re-fitting models).
 
 1. **ACQUIRE DATA**
 
-Using the requests and Beautiful Soup Python packages I was able to scrape and parse data from the Wine Enthusiast website over the course of two weeks, collecting a number of different features of each wine and their associated prices. This gave me a dataset of 47,674 wines from a wide range of regions, prices and styles.
+Using the requests and Beautiful Soup Python packages I was able to scrape and parse data from the Wine Enthusiast website over the course of two weeks, collecting a number of different features of each wine and their associated prices. This gave me a dataset of 47,674 wines with a wide range of origins, prices and styles.
 
 2. **DATA CLEANING**
 
@@ -93,23 +93,25 @@ Then, by implementing a simple correlation calculation of wine prices versus the
 
 Finally, I wrote a short function to plot the distribution of wine prices for the other categorical variables present, although this was not viable to visualise for some of the categorical fields which had 100s of unique values.
 
-Having noted a number of trends and/or delineating features within the data during the EDA stage, I then moved on to the modelling stage.
+Having noted a number of trends and/or delineating features within the data during the EDA stage, I then felt comfortable to move on to the modelling stage.
 
 4. **MODELLING**
 
 Initially I ran a simple linear regression on the numerical features within the dataset as a quick and simple benchmark, achieving an R<sup>2</sup> value of around 0.25. The coefficients extracted from this model also support the initial correlation analysis I had carried out earlier, with both `rating` and `age_when_drank` having positive signs with relatively similar strengths, while `bottle_size` was much closer to zero.
 
-Next I looked to incorporate the categorical features within the model, which required one-hot encoding for each category. However, when applied to all of the categorical features available, this did result in a huge increase in dimensionality of my dataset to over 11,000 features described by a sparse matrix. This meant that further modelling should be carried out by methodologies which can capitalise on sparse matrix inputs, such as stochastic gradient descent regression (SGDR).
+Next I looked to incorporate the categorical features within the model, which required one-hot encoding for each category. However, when applied to all of the categorical features available, this did result in a huge increase in dimensionality of my dataset to over 11,000 features described by a sparse matrix. This meant that further modelling should be carried out by methodologies which can capitalise on sparse matrix inputs, such as the stochastic gradient descent regressor (SGDR).
 
 After carrying out a grid search across several hyperparameters, the SGDR achieved an R<sup>2</sup> score of around 0.36 on test data unseen by the model during the fitting process, meaning we could now explain just over a third of the variance in wine prices using our model.
 
 5. **MODEL EVALUATION**
 
-A residual plot shows a fair amount of scope for improvement, which we had already assumed given the R<sup>2</sup> score attained by the SGDR model. There was considerable heteroscedasticity present in the residuals, with the model performing poorest in predicting higher priced wines. There were also occasions when the model predicted negative prices for wines, which is clearly not possible. The model also often overestimated the prices of wines, perhaps due to certain cheaper wines sharing many characteristics with wines that usually attract a higher value.
+A residual plot shows a fair amount of scope for improvement, which we had already assumed given the R<sup>2</sup> score attained by the SGDR model. There was considerable heteroscedasticity present in the residuals, with the model performing poorest in predicting higher priced wines. There were also occasions when the model predicted negative prices for wines, which is clearly not possible.
+
+The model also often overestimated the prices of wines, perhaps due to certain cheaper wines sharing many characteristics with wines that usually attract a higher value. While this does pose a problem for the model's score, it is one interesting area for investigation in regards to whether these much lower priced wines offer a possible investment opportunity given that the model implies they should be much higher in price.
 
 6. **AREAS FOR FURTHER INVESTIGATION**
 
-Now that we have generated a model with the features of our wines, I looked into other ways that I might be able to improve upon what has already been done. These fell into three different categories.
+Now that we have generated a model with the features of our wines, I looked into other ways that I might be able to improve upon what has already been done. So far, these have fallen into three different categories.
 
 *Dimensionality reduction*
 - Usually we could employ techniques such as principal component analysis (PCA) to define a new set of orthogonal axes within the feature space to optimise a trade-off between retained dimensions and retained variance/information within the data
@@ -117,9 +119,9 @@ Now that we have generated a model with the features of our wines, I looked into
 - However, after attempting to apply this to my dataset it proved to result in too much information loss for too little reduction in dimensionality, not to mention increased complexity of relating the new coordinate system back to the original variables
 
 *Natural Language Processing of Reviews*
-- By incorporating the text from each wine, also in one-hot encoded sparse matrix format, we could try to identify key words from the wine titles and reviews that could provide predictive power in regards to modelling wine prices
-- Using the SGDR on the text sparse matrix achieved an R<sup>2</sup> of around 0.18
-- Incorporating the NLP and categorical feature sparse matrices into one larger model is an area for further study
+- By incorporating the text from each wine, in a vectorised sparse matrix format, we could try to identify key words from the wine titles and reviews that could provide predictive power in regards to modelling wine prices
+- An investigation between simple count vectors and term frequency - inverse document frequency (TF-IDF) methodologies is also carried out, resulting in a demonstration of how models can be generalised better by alternating between these two different approaches
+- Incorporating the NLP and categorical feature sparse matrices into one larger composite model is one area for further study
 
 *Feature Engineering*
 - It was observed and noted in the EDA stage that the rating feature, when used in its quasi-continuous form (as previously discussed) that an exponential relationship was evident
